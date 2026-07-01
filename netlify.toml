@@ -1,0 +1,22 @@
+# Netlify build settings for the EchoPulse CRM (Vite + React SPA).
+#
+# Set these in the Netlify dashboard under Site settings > Environment variables
+# (Vite inlines VITE_* vars at BUILD time, so add them before the first deploy):
+#   VITE_SUPABASE_URL
+#   VITE_SUPABASE_ANON_KEY
+#   VITE_GROQ_API_KEY
+# Do NOT commit real values here.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback: every route serves index.html so client-side rendering works
+# and deep links / refreshes don't 404.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
